@@ -8,4 +8,4 @@ List<String> countries = [
 ];
 
 
-const String googleApiKey = 'AIkkhfhgc-kxgufYd_CAfvZ8hjuntIIksKS1jA'; //also here
+const String googleApiKey = 'AIzaSyBkAK5X_mjHfUOw-AOnLMnpaWIS9ioOH0w'; //also here

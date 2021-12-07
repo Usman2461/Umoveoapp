@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:umoveo/models/user_model.dart';
+import 'package:umoveo/services/firebase_auth.dart';
 import 'package:umoveo/widgets/custom_app_bar.dart';
 import 'package:umoveo/widgets/custom_buttom.dart';
 import 'package:umoveo/widgets/social_login_button.dart';
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+  LoginScreen({Key? key}) : super(key: key);
+  FirebaseAuthService authService = FirebaseAuthService();
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +29,9 @@ class LoginScreen extends StatelessWidget {
               CustomButtom(text: "Register your number", onTap: (){
                 Navigator.pushNamed(context, "/signup");
               },),
+              TextButton(onPressed: (){
+                Navigator.popAndPushNamed(context, "/signIn");
+              }, child: Text("Login via number", style: TextStyle(color: Colors.black),)),
               SizedBox(height: 20.0,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -41,7 +47,14 @@ class LoginScreen extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SocialLoginButton(imageIcon: "assets/images/googl.png", onTap: (){},),
+                  SocialLoginButton(imageIcon: "assets/images/googl.png", onTap: () async{
+
+                    FirebaseUser? result = await authService.loginWithGoogle();
+                    if(result!=null){
+                      Navigator.pushNamed(context, "/mainMenu");
+                    }
+
+                  },),
                   SizedBox(width: 10.0,),
                   SocialLoginButton(imageIcon: "assets/images/facebook.png",onTap: (){},),
                 ],

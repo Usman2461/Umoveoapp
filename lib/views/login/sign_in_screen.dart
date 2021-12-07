@@ -1,5 +1,7 @@
+import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:umoveo/constants/colors.dart';
+import 'package:umoveo/views/code_verification/code_verification_screen.dart';
 import 'package:umoveo/widgets/custom_app_bar.dart';
 import 'package:umoveo/widgets/custom_buttom.dart';
 import 'package:umoveo/widgets/custom_text_field.dart';
@@ -13,6 +15,11 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
+
+  String selectedValue = "";
+  String countrycode = "+92";
+  TextEditingController numberController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,18 +35,56 @@ class _SignInScreenState extends State<SignInScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CustomInputField(text: "EMAIL",),
-                SizedBox(height: 10,),
-                CustomInputField(text: "PASSWORD", isPasswordField: true,),
-                SizedBox(height: 10,),
-                TextButton(onPressed: () {
-                  Navigator.pushNamed(context, "/resetPass");
-                },
-                    child: Text("Forgot Password?",
-                      style: TextStyle(color: Colors.grey),)),
-                Center(child: CustomButtom(text: "Sign In", onTap: () {
-                  Navigator.pushNamed(context, "/mainMenu");
-                },)),
+                Text(
+                  "Enter Mobile Number",
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w800),
+                ),
+                SizedBox(
+                  height: 20.0,
+                ),
+                TextField(
+                  autofocus: true,
+                  keyboardType: TextInputType.phone,
+                  controller: numberController,
+                  decoration: InputDecoration(
+                    prefixIcon: CountryCodePicker(
+                      onChanged: (value) {
+                        countrycode = value.code!;
+                      },
+                      hideSearch: true,
+                    ),
+                    border: UnderlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide.none),
+                    filled: true,
+                    fillColor: Color(0x8BD5DDE0),
+                    hintText: "",
+                  ),
+                ),
+                SizedBox(
+                  height: 20.0,
+                ),
+                Text(
+                  "By continuing, I confirm that i have read & agree to the Terms & conditions and Privacy policy",
+                  style: TextStyle(color: Colors.grey),
+                ),
+                SizedBox(
+                  height: 50.0,
+                ),
+                Center(
+                    child: CustomButtom(
+                      text: 'Sign In',
+                      onTap: () {
+                        if (numberController.text.isNotEmpty)
+                          Navigator.push(context, MaterialPageRoute(
+                              builder: (context) =>
+                                  CodeVerification(
+                                      number :"$countrycode${numberController.text}")));
+                      },
+                    )),
                 SizedBox(height: 20.0,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -70,7 +115,9 @@ class _SignInScreenState extends State<SignInScreen> {
                   children: [
                     Text("Dont have an account?"),
                     TextButton(
-                        onPressed: () {}, child: Text("Sign up", style: TextStyle(color: Color(purpleC)),))
+                        onPressed: () {
+                          Navigator.popAndPushNamed(context, "/login");
+                        }, child: Text("Sign up", style: TextStyle(color: Color(purpleC)),))
                   ],),
                 SizedBox(height: 20.0,),
 

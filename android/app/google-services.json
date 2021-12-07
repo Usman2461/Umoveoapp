@@ -1,20 +1,21 @@
 {
   "project_info": {
     "project_number": "968335200092",
+    "firebase_url": "https://umoveo-c1d7d-default-rtdb.firebaseio.com",
     "project_id": "umoveo-c1d7d",
     "storage_bucket": "umoveo-c1d7d.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:968335200092:android:caddc7bd6944f1caa97b99",
+        "mobilesdk_app_id": "1:968335200092:android:5cc25f3962bcbeb4a97b99",
         "android_client_info": {
           "package_name": "com.example.umoveo"
         }
       },
       "oauth_client": [
         {
-          "client_id": "968335200092-qa4sh0oornbq27rd2nn2ti02bhu377np.apps.googleusercontent.com",
+          "client_id": "968335200092-pc5i1luo4basmulgeqejaknaq75u0d93.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.umoveo",

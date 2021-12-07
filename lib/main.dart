@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:umoveo/views/add_card/add_card.dart';
 import 'package:umoveo/views/address_selection/address_selection.dart';
@@ -24,6 +25,8 @@ import 'package:umoveo/views/splash/splash_screen.dart';
 import 'package:umoveo/views/track_vehicle/track_vehicle.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -50,7 +53,7 @@ class MyApp extends StatelessWidget {
       ).copyWith(scaffoldBackgroundColor: Colors.white),
       routes: {
         "/splash" : (context)=>const SplashScreen(),
-        "/login"  : (context)=>const LoginScreen(),
+        "/login"  : (context)=> LoginScreen(),
         "/signup" : (context)=>const SignUpScreen(),
         "/verify"  : (context)=> CodeVerification(number: '',),
         "/profile" : (context)=>const CreateProfile(),
